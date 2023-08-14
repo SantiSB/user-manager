@@ -1,6 +1,16 @@
+import { Routes, Route, HashRouter } from 'react-router-dom'
+import UserManager from './pages/UserManager'
+import StoreProvider from './store/StoreProvider'
+
 function App() {
   return (
-    <p>Hello World</p>
+    <StoreProvider>
+      <HashRouter>
+        <Routes>
+          <Route path='/' element={<UserManager />} />
+        </Routes>
+      </HashRouter>
+    </StoreProvider>
   )
 }
 

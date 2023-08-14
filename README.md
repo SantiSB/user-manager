@@ -70,7 +70,7 @@ Once your pull request is approved and any requested changes are addressed, your
  | [ESLint](https://eslint.org/)
  | [MUI](https://mui.com/)
  | [Axios](https://axios-http.com/docs/intro) 
- |
+ | 
 
 ## Authors
 [🐱‍💻@SantiSB](https://github.com/SantiSB)
