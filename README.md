@@ -1,9 +1,9 @@
 
 # User Manager App 👥 
 
-Welcome to the User Manager App! 🌟
+Welcome to the User Manager App! 👋
 
-The User Manager App is a practical tool that empowers you to effortlessly manage user data. From creating and viewing users to editing and deleting them – it's all at your fingertips! ✨🚀
+The User Manager App is a practical tool that empowers you to effortlessly manage user data. From creating and viewing users to editing and deleting them – it's all at your fingertips! 🚀
 
 ## Check It Out
 👉 [User Manager App 👥](https://santisb.github.io/user-manager/) 
@@ -74,4 +74,3 @@ Once your pull request is approved and any requested changes are addressed, your
 
 ## Authors
 [🐱‍💻@SantiSB](https://github.com/SantiSB)
-
