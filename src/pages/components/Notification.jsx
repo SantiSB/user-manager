@@ -10,36 +10,22 @@ const Alert = React.forwardRef(
     { elevation = 6, variant = 'filled', onClose, severity, sx, children },
     ref
   ) => (
-      <MuiAlert
-        elevation={elevation}
-        ref={ref}
-        variant={variant}
-        onClose={onClose}
-        severity={severity}
-        sx={sx}
-      >
-        {children}
-      </MuiAlert>
-    )
+    <MuiAlert
+      elevation={elevation}
+      ref={ref}
+      variant={variant}
+      onClose={onClose}
+      severity={severity}
+      sx={sx}
+    >
+      {children}
+    </MuiAlert>
+  )
 )
-
-const sxShape = PropTypes.shape({
-  backgroundColor: PropTypes.string,
-  color: PropTypes.string,
-})
-
-Alert.propTypes = {
-  elevation: PropTypes.number.isRequired,
-  variant: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
-  severity: PropTypes.string.isRequired,
-  sx: sxShape.isRequired, 
-  children: PropTypes.node.isRequired,
-}
 
 Alert.displayName = 'Alert'
 
-function Notification() {
+function Notification({ message }) {
   const [store, dispatch] = useContext(StoreContext)
 
   const handleClose = (reason) => {
@@ -56,10 +42,28 @@ function Notification() {
       onClose={handleClose}
     >
       <Alert onClose={handleClose} severity='success' sx={{ width: '100%' }}>
-        Successfully Done
+        {message}
       </Alert>
     </Snackbar>
   )
+}
+
+const sxShape = PropTypes.shape({
+  backgroundColor: PropTypes.string,
+  color: PropTypes.string,
+})
+
+Alert.propTypes = {
+  elevation: PropTypes.number.isRequired,
+  variant: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+  severity: PropTypes.string.isRequired,
+  sx: sxShape.isRequired,
+  children: PropTypes.node.isRequired,
+}
+
+Notification.propTypes = {
+  message: PropTypes.string.isRequired,
 }
 
 export default Notification

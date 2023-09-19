@@ -16,26 +16,25 @@ import { types } from '../../store/StoreReducer'
 function EditUserModal({ cellValues }) {
   const [, dispatch] = useContext(StoreContext)
 
+  const { row } = cellValues
+  const { name: initialName, username, email, phone } = row
   const [open, setOpen] = useState(false)
+
   const [formData, setFormData] = useState({
-    name: cellValues.row.name,
-    username: cellValues.row.username,
-    email: cellValues.row.email,
-    phone: cellValues.row.phone,
+    name: initialName,
+    username,
+    email,
+    phone,
   })
 
   useEffect(() => {
     setFormData({
-      name: cellValues.row.name,
-      username: cellValues.row.username,
-      email: cellValues.row.email,
-      phone: cellValues.row.phone,
+      name: initialName,
+      username,
+      email,
+      phone,
     })
-  }, [cellValues.row])
-
-  const handleClickOpen = () => setOpen(true)
-
-  const handleClose = () => setOpen(false)
+  }, [initialName, username, email, phone])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -45,12 +44,11 @@ function EditUserModal({ cellValues }) {
     }))
   }
 
-  const updateUser = () => {
+  const editUser = () => {
     const newUser = {
-      id: cellValues.row.id,
+      id: row.id,
       ...formData,
     }
-
     dispatch({ type: types.updateUser, payload: newUser })
     setOpen(false)
     dispatch({ type: types.handleNotification })
@@ -59,35 +57,35 @@ function EditUserModal({ cellValues }) {
   return (
     <div>
       <IconButton
-        onClick={handleClickOpen}
-        color="primary"
-        aria-label="upload picture"
-        component="label"
+        onClick={() => setOpen(true)}
+        color='primary'
+        aria-label='upload picture'
+        component='label'
       >
         <EditIcon />
       </IconButton>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Edit User</DialogTitle>
         <DialogContent>
           {Object.keys(formData).map((field) => (
             <TextField
               key={field}
-              margin="dense"
+              margin='dense'
               name={field}
               label={field.charAt(0).toUpperCase() + field.slice(1)}
-              type="text"
+              type='text'
               fullWidth
-              variant="standard"
+              variant='standard'
               value={formData[field]}
               onChange={handleInputChange}
             />
           ))}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="error">
+          <Button onClick={() => setOpen(false)} color='error'>
             Cancel
           </Button>
-          <Button onClick={updateUser} variant="outlined">
+          <Button onClick={editUser} variant='outlined'>
             Edit
           </Button>
         </DialogActions>

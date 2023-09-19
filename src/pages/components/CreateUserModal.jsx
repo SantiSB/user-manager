@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import {
   Button,
@@ -10,37 +10,14 @@ import {
 } from '@mui/material'
 import { StoreContext } from '../../store/StoreProvider'
 import { types } from '../../store/StoreReducer'
-
-const formFields = [
-  { name: 'name', label: 'Name', type: 'text' },
-  { name: 'username', label: 'Username', type: 'text' },
-  { name: 'email', label: 'Email', type: 'text' },
-  { name: 'phone', label: 'Phone', type: 'text' },
-]
+import formFields from '../utils/formFields'
 
 function CreateUserModal() {
   const [store, dispatch] = useContext(StoreContext)
-
   const [open, setOpen] = useState(false)
+  const { control, handleSubmit, reset } = useForm()
 
-  const [formValues] = useState(
-    formFields.reduce((acc, field) => {
-      acc[field.name] = ''
-      return acc
-    }, {})
-  )
-
-  const { control, handleSubmit, reset } = useForm({
-    defaultValues: formValues,
-  })
-
-  useEffect(() => {
-    if (!open) {
-      reset(formValues)
-    }
-  }, [open, reset, formValues])
-
-  const onSubmit = (data) => {
+  const createUser = (data) => {
     const newUser = {
       id: store.usersData.length + 1,
       ...data,
@@ -50,44 +27,42 @@ function CreateUserModal() {
     dispatch({ type: types.handleNotification })
   }
 
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
+  const cancelCreation = () => {
+    reset()
     setOpen(false)
   }
 
   return (
     <div>
-      <Button variant='contained' onClick={handleClickOpen} sx={{ mb: 2 }}>
+      <Button variant='contained' onClick={() => setOpen(true)} sx={{ mb: 2 }}>
         Create User
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Create User</DialogTitle>
         <DialogContent>
           <form>
-            {formFields.map((item) => (
+            {formFields.map(({ name, label, type }) => (
               <Controller
-                key={item.name}
-                name={item.name}
+                key={name}
+                name={name}
                 control={control}
+                defaultValue=''
                 render={({ field, fieldState }) => (
                   <TextField
                     margin='dense'
-                    id={item.name}
-                    label={item.label}
-                    type={item.type}
+                    id={name}
+                    label={label}
+                    type={type}
                     fullWidth
                     variant='standard'
-                    value={field.value}
-                    onChange={field.onChange}
-                    onBlur={field.onBlur}
-                    onFocus={field.onFocus}
                     error={Boolean(fieldState.error)}
                     helperText={
                       fieldState.error ? fieldState.error.message : ''
                     }
+                    value={field.value}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    onFocus={field.onFocus}
                   />
                 )}
               />
@@ -95,10 +70,10 @@ function CreateUserModal() {
           </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color='error'>
+          <Button onClick={cancelCreation} color='error'>
             Cancel
           </Button>
-          <Button onClick={handleSubmit(onSubmit)} variant='outlined'>
+          <Button onClick={handleSubmit(createUser)} variant='outlined'>
             Create User
           </Button>
         </DialogActions>

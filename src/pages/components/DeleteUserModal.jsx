@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 import {
   Button,
@@ -13,16 +13,7 @@ import { types } from '../../store/StoreReducer'
 
 function DeleteUserModal({ cellValues }) {
   const [, dispatch] = useContext(StoreContext)
-
   const [open, setOpen] = useState(false)
-
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-  }
 
   const deleteUser = () => {
     dispatch({ type: types.deleteUser, payload: cellValues.row })
@@ -31,19 +22,19 @@ function DeleteUserModal({ cellValues }) {
   }
 
   return (
-    <div>
+    <>
       <IconButton
-        onClick={handleClickOpen}
+        onClick={() => setOpen(true)}
         color='primary'
-        aria-label='upload picture'
+        aria-label='delete user'
         component='label'
       >
         <DeleteIcon />
       </IconButton>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Delete User</DialogTitle>
         <DialogActions>
-          <Button onClick={handleClose} color='error'>
+          <Button onClick={() => setOpen(false)} color='error'>
             Cancel
           </Button>
           <Button onClick={deleteUser} variant='outlined' color='error'>
@@ -51,7 +42,7 @@ function DeleteUserModal({ cellValues }) {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   )
 }
 
