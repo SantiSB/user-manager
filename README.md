@@ -64,13 +64,18 @@ I will review your pull request and might offer feedback or suggestions to enhan
 Once your pull request is approved and any requested changes are addressed, your contribution will be merged into the develop branch. Congratulations, you've successfully contributed to the User Manager App! 🎉
 
 ## 👨‍💻 Tech Stack:
+![vite](https://github.com/SantiSB/simple-calculator/assets/55597241/f2fd911f-1db0-4cc8-ba4f-f1c369eff463)
+![react](https://github.com/SantiSB/simple-calculator/assets/55597241/127d3130-fbae-4fe7-aca4-f1dd22a99bbe)
+![mui](https://github.com/SantiSB/simple-calculator/assets/55597241/ae0953ef-1044-4a4e-8681-f00805920f58)
+![prettier](https://github.com/SantiSB/simple-calculator/assets/55597241/7eddb841-1f02-4b60-8617-1c6000151b5c)
+![eslint](https://github.com/SantiSB/simple-calculator/assets/55597241/d57aac2d-43b3-48c4-9ebc-52e4fb4205eb)
+
+
  | [Vite](https://vitejs.dev/)
  | [React](https://es.react.dev/)
+ | [MUI](https://mui.com/)
  | [Prettier](https://prettier.io/)
  | [ESLint](https://eslint.org/)
- | [MUI](https://mui.com/)
- | [Axios](https://axios-http.com/docs/intro) 
- | 
 
 ## Authors
 [🐱‍💻@SantiSB](https://github.com/SantiSB)
